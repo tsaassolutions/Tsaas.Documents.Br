@@ -12,6 +12,7 @@
     <Authors>TSaaS Solutions</Authors>
     <Company>TSaaS Solutions</Company>
     <Description>Biblioteca para validação e manipulação de documentos brasileiros (CPF, CNPJ, RG, etc)</Description>
+	<PackageIcon>icon.png</PackageIcon>
     <PackageTags>cpf;cnpj;rg;brasil;documentos;validacao;documents;brazil;validation</PackageTags>
     <PackageProjectUrl>https://github.com/tsaassolutions/Tsaas.Documents.Br</PackageProjectUrl>
     <RepositoryUrl>https://github.com/tsaassolutions/Tsaas.Documents.Br</RepositoryUrl>
@@ -23,6 +24,7 @@
 
   <ItemGroup>
     <None Include="..\README.md" Pack="true" PackagePath="\" Condition="Exists('..\README.md')" />
+	<None Include="..\icon.png" Pack="true" PackagePath="\" Condition="Exists('..\icon.png')" />
   </ItemGroup>
 
 </Project>
