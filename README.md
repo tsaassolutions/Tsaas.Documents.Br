@@ -5,23 +5,23 @@
 
 Uma biblioteca .NET moderna e robusta para validação e formatação de documentos brasileiros (CPF e CNPJ) com suporte a CNPJs alfanuméricos.
 
-## ? Características
+##  Características
 
-- ? **Validação completa** de CPF e CNPJ com verificação de dígitos verificadores
-- ?? **Suporte a CNPJ alfanumérico** (A-Z e 0-9 nos primeiros 12 caracteres)
-- ?? **Formatação automática** de documentos
-- ??? **Validação em tempo de construção** do objeto (fail-fast)
-- ?? **Performance otimizada** com cache de validação e valores não formatados
-- ?? **Value Object Pattern** implementado corretamente
-- ?? **Conversão implícita** para string
-- ?? **TryCreate e TryParse** para criação segura sem exceções
-- ?? **Interface comum** `IDocument` para extensibilidade
-- ?? **Comparação por valor** (Equals, GetHashCode, operadores ==, !=)
-- ?? **Exceções customizadas** com informações detalhadas
-- ?? **Totalmente documentado** com XML documentation
-- ? **100% testado** com xUnit
+-  **Validação completa** de CPF e CNPJ com verificação de dígitos verificadores
+-  **Suporte a CNPJ alfanumérico** (A-Z e 0-9 nos primeiros 12 caracteres)
+-  **Formatação automática** de documentos
+-  **Validação em tempo de construção** do objeto (fail-fast)
+-  **Performance otimizada** com cache de validação e valores não formatados
+-  **Value Object Pattern** implementado corretamente
+-  **Conversão implícita** para string
+-  **TryCreate e TryParse** para criação segura sem exceções
+-  **Interface comum** `IDocument` para extensibilidade
+-  **Comparação por valor** (Equals, GetHashCode, operadores ==, !=)
+-  **Exceções customizadas** com informações detalhadas
+-  **Totalmente documentado** com XML documentation
+-  **100% testado** com xUnit
 
-## ?? Instalação
+##  Instalação
 
 ```bash
 dotnet add package Tsaas.Documents.Br
@@ -33,7 +33,7 @@ Ou via Package Manager Console:
 Install-Package Tsaas.Documents.Br
 ```
 
-## ?? Uso
+##  Uso
 
 ### CPF
 
@@ -123,10 +123,10 @@ catch (InvalidDocumentException ex)
 ```
 
 **Validações aplicadas:**
-- ? Comprimento exato de 11 dígitos
-- ? Apenas números (0-9)
-- ? Rejeita sequências de dígitos iguais (111.111.111-11, 000.000.000-00, etc.)
-- ? Valida ambos os dígitos verificadores usando o algoritmo oficial
+-  Comprimento exato de 11 dígitos
+-  Apenas números (0-9)
+-  Rejeita sequências de dígitos iguais (111.111.111-11, 000.000.000-00, etc.)
+-  Valida ambos os dígitos verificadores usando o algoritmo oficial
 
 ### CNPJ
 
@@ -160,7 +160,7 @@ Console.WriteLine(cnpjAlfa.IsValid);        // true
 var cnpjValido = Cnpj.TryCreate("90.024.778/0001-23");
 var cnpjInvalido = Cnpj.TryCreate("11.111.111/1111-11");
 
-Console.WriteLine(cnpjValido?.FormattedValue);  // "90.024.778/0001-23"
+Console.WriteLine(cnpjValido.FormattedValue);  // "90.024.778/0001-23"
 Console.WriteLine(cnpjInvalido == null);        // true
 
 // TryParse
@@ -212,12 +212,12 @@ catch (InvalidDocumentException ex)
 ```
 
 **Validações aplicadas:**
-- ? Comprimento exato de 14 caracteres
-- ? Primeiros 12 caracteres: A-Z (maiúsculas) ou 0-9
-- ? Últimos 2 caracteres (DV): apenas 0-9
-- ? Rejeita CNPJ zerado (00000000000000)
-- ? Valida ambos os dígitos verificadores usando algoritmo especial para alfanuméricos
-- ? Rejeita letras minúsculas
+-  Comprimento exato de 14 caracteres
+-  Primeiros 12 caracteres: A-Z (maiúsculas) ou 0-9
+-  Últimos 2 caracteres (DV): apenas 0-9
+-  Rejeita CNPJ zerado (00000000000000)
+-  Valida ambos os dígitos verificadores usando algoritmo especial para alfanuméricos
+-  Rejeita letras minúsculas
 
 ### Interface IDocument
 
@@ -246,8 +246,8 @@ ProcessarDocumento(cnpj);
 ### Valores Nulos
 
 ```csharp
-Cpf? cpfNulo = null;
-Cnpj? cnpjNulo = null;
+Cpf cpfNulo = null;
+Cnpj cnpjNulo = null;
 
 // Conversão implícita retorna string vazia
 string cpfString = cpfNulo;   // ""
@@ -257,25 +257,25 @@ Console.WriteLine(cpfNulo == null);  // true
 Console.WriteLine(cnpjNulo == null); // true
 ```
 
-## ??? Arquitetura
+##  Arquitetura
 
 ### Estrutura do Projeto
 
 ```
 Tsaas.Documents.Br/
-??? Abstractions/
-?   ??? IDocument.cs              # Interface base para documentos
-??? Documents/
-?   ??? DocumentBase.cs           # Classe abstrata com lógica comum
-?   ??? Cpf.cs                    # Implementação de CPF
-?   ??? Cnpj.cs                   # Implementação de CNPJ
-??? Exceptions/
-?   ??? InvalidDocumentException.cs  # Exceção customizada
-??? Formatting/
-?   ??? DocumentFormatter.cs      # Formatação de documentos
-??? Validation/
-    ??? CpfValidator.cs           # Validação de CPF (apenas numérico)
-    ??? CnpjValidator.cs          # Validação de CNPJ (numérico e alfanumérico)
+ Abstractions/
+    IDocument.cs              # Interface base para documentos
+ Documents/
+    DocumentBase.cs           # Classe abstrata com lógica comum
+    Cpf.cs                    # Implementação de CPF
+    Cnpj.cs                   # Implementação de CNPJ
+ Exceptions/
+    InvalidDocumentException.cs  # Exceção customizada
+ Formatting/
+    DocumentFormatter.cs      # Formatação de documentos
+ Validation/
+     CpfValidator.cs           # Validação de CPF (apenas numérico)
+     CnpjValidator.cs          # Validação de CNPJ (numérico e alfanumérico)
 ```
 
 ### Componentes Principais
@@ -295,10 +295,10 @@ public interface IDocument
 
 #### DocumentBase
 Classe abstrata que implementa funcionalidades comuns:
-- ?? Armazenamento imutável do valor original
-- ?? Remoção automática de caracteres especiais (mantém A-Z e 0-9)
-- ? Cache de `UnformattedValue` e `IsValid`
-- ?? Conversão para maiúsculas automática
+-  Armazenamento imutável do valor original
+-  Remoção automática de caracteres especiais (mantém A-Z e 0-9)
+-  Cache de `UnformattedValue` e `IsValid`
+-  Conversão para maiúsculas automática
 
 ```csharp
 public abstract class DocumentBase : IDocument
@@ -314,12 +314,12 @@ public abstract class DocumentBase : IDocument
 
 #### CPF e CNPJ (Value Objects)
 Implementam o **Value Object Pattern** completo:
-- ? Imutabilidade
-- ? Igualdade por valor (Equals, GetHashCode)
-- ? Operadores == e !=
-- ? Conversão implícita para string
-- ? TryCreate e TryParse para criação segura
-- ? Validação em tempo de construção
+-  Imutabilidade
+-  Igualdade por valor (Equals, GetHashCode)
+-  Operadores == e !=
+-  Conversão implícita para string
+-  TryCreate e TryParse para criação segura
+-  Validação em tempo de construção
 
 #### InvalidDocumentException
 Exceção especializada que contém informações detalhadas:
@@ -350,13 +350,13 @@ public class InvalidDocumentException : Exception
 ```
 Base: 12ABC3450001
 Pesos: [5,4,3,2,9,8,7,6,5,4,3,2]
-'1' = ASCII 49 ? (49-48) * 5 = 5
-'2' = ASCII 50 ? (50-48) * 4 = 8
-'A' = ASCII 65 ? (65-48) * 3 = 51
+'1' = ASCII 49  (49-48) * 5 = 5
+'2' = ASCII 50  (50-48) * 4 = 8
+'A' = ASCII 65  (65-48) * 3 = 51
 ...
 ```
 
-## ?? Testes
+##  Testes
 
 O projeto inclui **100% de cobertura de testes** com xUnit:
 
@@ -371,40 +371,40 @@ dotnet test /p:CollectCoverage=true
 ### Casos de Teste Cobertos
 
 **CPF:**
-- ? Formatados e não formatados válidos
-- ? Dígitos verificadores corretos e incorretos
-- ? Sequências de dígitos iguais (111.111.111-11, etc.)
-- ? Comprimentos inválidos
-- ? Caracteres inválidos (letras, especiais)
-- ? Valores nulos e vazios
+-  Formatados e não formatados válidos
+-  Dígitos verificadores corretos e incorretos
+-  Sequências de dígitos iguais (111.111.111-11, etc.)
+-  Comprimentos inválidos
+-  Caracteres inválidos (letras, especiais)
+-  Valores nulos e vazios
 
 **CNPJ:**
-- ? CNPJs numéricos e alfanuméricos válidos
-- ? Formatados e não formatados
-- ? Dígitos verificadores corretos e incorretos
-- ? CNPJ zerado
-- ? Letras minúsculas (inválidas)
-- ? Letras nos dígitos verificadores (inválidas)
-- ? Comprimentos inválidos
-- ? Valores nulos e vazios
+-  CNPJs numéricos e alfanuméricos válidos
+-  Formatados e não formatados
+-  Dígitos verificadores corretos e incorretos
+-  CNPJ zerado
+-  Letras minúsculas (inválidas)
+-  Letras nos dígitos verificadores (inválidas)
+-  Comprimentos inválidos
+-  Valores nulos e vazios
 
-## ?? Requisitos
+##  Requisitos
 
 - **.NET 8.0** ou superior
 - **C# 12.0**
 
-## ?? Versionamento
+##  Versionamento
 
 Seguimos [Semantic Versioning](https://semver.org/):
 - **MAJOR**: Mudanças incompatíveis na API
 - **MINOR**: Novas funcionalidades (compatível)
 - **PATCH**: Correções de bugs
 
-## ?? Licença
+##  Licença
 
 Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-## ?? Contribuindo
+##  Contribuindo
 
 Contribuições são bem-vindas! Por favor:
 
@@ -415,34 +415,34 @@ Contribuições são bem-vindas! Por favor:
 5. Abra um Pull Request
 
 ### Diretrizes:
-- ? Mantenha 100% de cobertura de testes
-- ? Siga os padrões de código existentes
-- ? Adicione XML documentation para APIs públicas
-- ? Atualize o README se necessário
+-  Mantenha 100% de cobertura de testes
+-  Siga os padrões de código existentes
+-  Adicione XML documentation para APIs públicas
+-  Atualize o README se necessário
 
-## ?? Reportar Problemas
+##  Reportar Problemas
 
-Encontrou um bug? Por favor, abra uma [issue](https://github.com/tsaassolutions/Tsaas.Documents.Br/issues) com:
-- ?? Descrição clara do problema
-- ?? Passos para reproduzir
-- ?? Código de exemplo (se possível)
-- ??? Versão do .NET e do pacote
+Encontrou um bug Por favor, abra uma [issue](https://github.com/tsaassolutions/Tsaas.Documents.Br/issues) com:
+-  Descrição clara do problema
+-  Passos para reproduzir
+-  Código de exemplo (se possível)
+-  Versão do .NET e do pacote
 
 
-## ?? Suporte
+##  Suporte
 
-- ?? **Email**: suporte@tsaas.com.br
-- ?? **Issues**: [GitHub Issues](https://github.com/tsaassolutions/Tsaas.Documents.Br/issues)
-- ?? **Documentação**: [GitHub Wiki](https://github.com/tsaassolutions/Tsaas.Documents.Br/wiki)
+-  **Email**: suporte@tsaas.com.br
+-  **Issues**: [GitHub Issues](https://github.com/tsaassolutions/Tsaas.Documents.Br/issues)
+-  **Documentação**: [GitHub Wiki](https://github.com/tsaassolutions/Tsaas.Documents.Br/wiki)
 
-## ?? Autores
+##  Autores
 
 **TSaaS Solutions** - [GitHub](https://github.com/tsaassolutions)
 
-## ?? Agradecimentos
+##  Agradecimentos
 
 Obrigado a todos que contribuíram para este projeto!
 
 ---
 
-? Se este projeto foi útil para você, considere dar uma estrela no GitHub!
+ Se este projeto foi útil para você, considere dar uma estrela no GitHub!
