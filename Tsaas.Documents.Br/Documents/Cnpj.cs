@@ -1,4 +1,5 @@
-﻿using Tsaas.Documents.Br.Formatting;
+﻿using Tsaas.Documents.Br.Exceptions;
+using Tsaas.Documents.Br.Formatting;
 using Tsaas.Documents.Br.Validation;
 
 namespace Tsaas.Documents.Br.Documents
@@ -9,6 +10,15 @@ namespace Tsaas.Documents.Br.Documents
 
         public Cnpj(string value) : base(value)
         {
+            if (UnformattedValue.Length != CnpjLength)
+            {
+                throw new InvalidDocumentException("CNPJ", value);
+            }
+
+            if (!CnpjValidator.Validate(UnformattedValue))
+            {
+                throw new InvalidDocumentException("CNPJ", value);
+            }
         }
 
         public override string FormattedValue => DocumentFormatter.FormatCnpj(UnformattedValue);
