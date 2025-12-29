@@ -1,4 +1,5 @@
-﻿using Tsaas.Documents.Br.Validation;
+﻿using Tsaas.Documents.Br.Formatting;
+using Tsaas.Documents.Br.Validation;
 
 namespace Tsaas.Documents.Br.Documents
 {
@@ -10,16 +11,7 @@ namespace Tsaas.Documents.Br.Documents
         {
         }
 
-        public override string FormattedValue
-        {
-            get
-            {
-                if (UnformattedValue.Length != CpfLength)
-                    return UnformattedValue;
-
-                return $"{UnformattedValue[..3]}.{UnformattedValue[3..6]}.{UnformattedValue[6..9]}-{UnformattedValue[9..11]}";
-            }
-        }
+        public override string FormattedValue => DocumentFormatter.FormatCpf(UnformattedValue);
 
         protected override bool Validate()
         {

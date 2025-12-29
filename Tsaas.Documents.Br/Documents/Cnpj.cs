@@ -1,4 +1,5 @@
-﻿using Tsaas.Documents.Br.Validation;
+﻿using Tsaas.Documents.Br.Formatting;
+using Tsaas.Documents.Br.Validation;
 
 namespace Tsaas.Documents.Br.Documents
 {
@@ -10,16 +11,7 @@ namespace Tsaas.Documents.Br.Documents
         {
         }
 
-        public override string FormattedValue
-        {
-            get
-            {
-                if (UnformattedValue.Length != CnpjLength)
-                    return UnformattedValue;
-
-                return $"{UnformattedValue[..2]}.{UnformattedValue[2..5]}.{UnformattedValue[5..8]}/{UnformattedValue[8..12]}-{UnformattedValue[12..14]}";
-            }
-        }
+        public override string FormattedValue => DocumentFormatter.FormatCnpj(UnformattedValue);
 
         protected override bool Validate()
         {
