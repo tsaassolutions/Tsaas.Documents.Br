@@ -5,6 +5,12 @@ VisualStudioVersion = 17.14.36811.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tsaas.Documents.Br", "Tsaas.Documents.Br\Tsaas.Documents.Br.csproj", "{D1F623B8-17A4-4665-B342-FFA3EF825484}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{60CA0214-88C6-8651-7B8B-6C0F6C5892CB}"
+	ProjectSection(SolutionItems) = preProject
+		cnpj-alfanumerico.pdf = cnpj-alfanumerico.pdf
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
