@@ -17,7 +17,7 @@ namespace Tsaas.Documents.Br.Documents
 
         public string Value => _value;
 
-        public string UnformattedValue => _unformattedValue ??= Regex.Replace(_value, @"[^\d]", string.Empty);
+        public string UnformattedValue => _unformattedValue ??= Regex.Replace(_value, @"[^\dA-Z]", string.Empty, RegexOptions.IgnoreCase).ToUpperInvariant();
 
         public abstract string FormattedValue { get; }
 
